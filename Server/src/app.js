@@ -21,12 +21,12 @@ app.use(express.json()); // we can use json in req and res
 app.use(morgan("dev"));
 
 //routes
-app.use("/api/v1/user", authRoute);
+app.use("/api/v1/auth", authRoute);
 
 //rest api
 app.get("/", (req, res) => {
   res.send({
-    message: "Welcone to Ecommerce",
+    message: "Welcome to Ecommerce",
   });
 });
 

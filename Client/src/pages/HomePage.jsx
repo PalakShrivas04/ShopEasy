@@ -1,12 +1,15 @@
-import React from 'react'
+import React from "react";
+import Layout from "../components/Layouts/Layout";
+import { useAuth } from "../context/auth";
 
-const Home = () => {
+export const HomePage = () => {
+  const [auth, setAuth] = useAuth();
   return (
-      <Layout>
-          <h1>
-          Home
-          </h1></Layout>
-  )
-}
+    <Layout title={"Best offers "}>
+      <h1>HomePage</h1>
+      <pre>{JSON.stringify(auth, null, 4)}</pre>
+    </Layout>
+  );
+};
 
-export default Home
+export default HomePage;

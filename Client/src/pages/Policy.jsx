@@ -1,11 +1,12 @@
-import React from 'react'
-import Layout from '../components/Layouts/Layout'
+import React from "react";
+import Layout from "../components/Layouts/Layout";
 
-const Policy = () => {
+export const Policy = () => {
   return (
-      <Layout>
-          <h1>Policy</h1></Layout>
-  )
-}
+    <Layout title={"Privacy Policy"}>
+      <h1>Policy</h1>
+    </Layout>
+  );
+};
 
-export default Policy
+export default Policy;

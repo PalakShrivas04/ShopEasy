@@ -1,19 +1,35 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 
 export const Footer = () => {
   return (
-    <div className="mt-40 bg-slate-800">
-    <div className="flex max-w-5xl p-10 mx-auto justify-between items-center text-white md:flex-row flex-col gap-10 text-center">
-        <div className="flex flex-col items-center md:w-[70%]">
-        
-      <h1 className="text-4xl font-bold m-2">ECOMMERCE APP</h1>
-          <p className="italic text-cyan-500 mb-2">Elevating e-commerce experience with modern interactivity, showcasing how small changes can create a big impact on lifestyle</p>
-          <p>Copyright 2024 &copy; PalakShrivas</p>
-        </div>
-      </div>
-      </div>
-  );
+    <div className="footer bg-gradient-to-r from-gray-700 to-black text-white p-6">
+    <h1 className="text-center">All Right Reserved &copy; Palak</h1>
+    <p className="text-center mt-1.2">
+      <Link
+        to="/about"
+        className="no-underline text-white px-2 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
+      >
+        About
+      </Link>
+      |
+      <Link
+        to="/contact"
+        className="no-underline text-white px-2 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
+      >
+        Contact
+      </Link>
+      |
+      <Link
+        to="/policy"
+        className="no-underline text-white px-2 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
+      >
+        Privacy Policy
+      </Link>
+    </p>
+  </div>
+);
 };
 
 export default Footer;
