@@ -28,4 +28,3 @@ const Spinner = ({ path = "login" }) => {
 };
 
 export default Spinner;
- 

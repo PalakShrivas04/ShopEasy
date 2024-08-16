@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Layout from "../components/Layouts/Layout.jsx";
+import Layout from "../components/Layout/Layout";
 
-export const PageNotFound = () => {
+const Pagenotfound = () => {
   return (
-    <Layout title={"go back- page not found"}>
+    <Layout>
       <div className="flex flex-col items-center justify-center min-h-[65vh]">
         <h1 className="text-9xl font-bold">404</h1>
         <h2 className="text-xl font-normal">Oops ! Page Not Found</h2>
@@ -19,4 +19,4 @@ export const PageNotFound = () => {
   );
 };
 
-export default PageNotFound;
+export default Pagenotfound;

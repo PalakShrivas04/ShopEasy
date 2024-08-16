@@ -11,9 +11,9 @@ const AuthProvider = ({ children }) => {
     token: "",
   });
   //default axios
-     axios.defaults.headers.common["Authorization"] = auth?.token;
+  axios.defaults.headers.common["Authorization"] = auth?.token;
 
-  //   // Set axios default authorization header when auth.token changes
+  // Set axios default authorization header when auth.token changes
   useEffect(() => {
     const data = localStorage.getItem("auth");
 
@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
       });
     }
-    //eslint-disable-next-line 
+    //eslint-disable-next-line
   }, []);
   return (
     <AuthContext.Provider value={[auth, setAuth]}>
@@ -33,8 +33,6 @@ const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-//custom hook
 const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };

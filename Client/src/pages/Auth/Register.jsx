@@ -1,25 +1,24 @@
 import React, { useState } from "react";
-import Layout from "../../components/Layouts/Layout";
+import Layout from "./../../components/Layout/Layout";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios";
-import "../../styles/authStyles.css";
 
-export const Register = () => {
-  const [name, setName] = useState("");
+const Register = () => {
+  const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
+
   const navigate = useNavigate();
 
-  //form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/v1/auth/register", {
-        name,
+      const res = await axios.post("/api/v1/user/register", {
+        username,
         email,
         password,
         phone,
@@ -27,174 +26,100 @@ export const Register = () => {
         answer,
       });
       if (res && res.data.success) {
-        toast.success(res.data && res.data.message);
+        toast.success(res.data.message);
         navigate("/login");
       } else {
         toast.error(res.data.message);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Something went wrong");
     }
   };
 
   return (
-    <Layout title="Register-Ecommerce App">
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
-          />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Register to your account
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            action="#"
-            method="POST"
-            className="space-y-6"
-            onSubmit={handleSubmit}
+    <Layout title="Register - Ecommerce App">
+      <div className="flex items-center justify-center min-h-[83vh] flex-col bg-gradient-to-r from-pink-200 to-blue-100">
+        <form
+          onSubmit={handleSubmit}
+          className="shadow-lg p-8 bg-white w-full max-w-md"
+        >
+          <h4 className="text-center mb-4 font-bold text-2xl font-serif">
+            REGISTER FORM
+          </h4>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="name"
+              value={username}
+              onChange={(e) => setName(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="Enter Your Name"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="Enter Your Email"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="Enter Your Password"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="Enter Your Phone"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="Enter Your Address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              name="answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-input w-full border-b border-black focus:ring-0 focus:border-black"
+              placeholder="What is your favourite sports name"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="btn w-full bg-black text-white py-2 mt-4 hover:bg-gradient-to-r from-gray-700 to-black"
           >
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  autoComplete="name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Password
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Phone
-              </label>
-              <div className="mt-2">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                  autoComplete="address"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="text"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                What is your favourite pet?
-              </label>
-              <div className="mt-2">
-                <input
-                  id="pet"
-                  name="pet"
-                  type="text"
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  required
-                  autoComplete="pet"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-        </div>
+            REGISTER
+          </button>
+        </form>
       </div>
     </Layout>
   );

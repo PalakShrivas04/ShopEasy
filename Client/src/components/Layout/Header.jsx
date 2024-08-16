@@ -4,9 +4,8 @@ import { GiShoppingBag } from "react-icons/gi";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { Dropdown } from "flowbite-react";
-import {  HiLogout, HiViewGrid } from "react-icons/hi";
 
-export const Header = () => {
+const Header = () => {
   const [auth, setAuth] = useAuth();
   const handleLogout = () => {
     setAuth({
@@ -87,25 +86,26 @@ export const Header = () => {
               </NavLink>
             </>
           ) : (
-              <Dropdown label={auth?.user?.name}className="bg-gray-900 text-white" >
+            <Dropdown
+             label={auth?.user?.role === 1 ? "Admin" : "User"}
+              dismissOnClick={false}
+              className="bg-gray-800 text-white"
+              >
                 
-              <Dropdown.Item icon={HiViewGrid}>
-                  {" "}
+                <Dropdown.Item>
                   
                 <NavLink
                   to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
-                  className="px-4 py-2  text-gray-300  hover:text-gray-500"
-                  >
-                   
+                  className="px-4 py-2  text-gray-300  hover:text-gray-900"
+                >
                   Dashboard
                 </NavLink>
               </Dropdown.Item>
-              <Dropdown.Item icon={HiLogout}>
-                {" "}
+              <Dropdown.Item>
                 <NavLink
                   onClick={handleLogout}
                   to="/login"
-                  className=" px-4 py-2  text-gray-300  hover:text-gray-500"
+                  className=" px-4 py-2  text-gray-300  hover:text-gray-900"
                 >
                   Logout
                 </NavLink>
