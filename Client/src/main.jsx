@@ -7,6 +7,9 @@ import { AuthProvider } from "./context/auth.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/reset.css";
 import { SearchProvider } from "./context/search.jsx";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://shopeasy-4ark.onrender.com";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
