@@ -3,7 +3,6 @@ import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
-import Pagenotfound from "./pages/pagenotfound";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import Dashboard from "./pages/user/Dashboard";
@@ -20,6 +19,7 @@ import Products from "./pages/Admin/Products";
 import UpdateProduct from "./pages/Admin/UpdateProduct";
 import Search from "./pages/Search";
 import ProductDetails from "./pages/ProductDetails";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   return (
@@ -47,7 +47,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
-        <Route path="*" element={<Pagenotfound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

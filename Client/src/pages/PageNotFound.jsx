@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Layout from "../components/Layout/Layout";
+import Layout from "./../components/Layout/Layout";
 
-const Pagenotfound = () => {
+const PageNotFound = () => {
   return (
     <Layout>
       <div className="flex flex-col items-center justify-center min-h-[65vh]">
@@ -19,4 +19,4 @@ const Pagenotfound = () => {
   );
 };
 
-export default Pagenotfound;
+export default PageNotFound;
