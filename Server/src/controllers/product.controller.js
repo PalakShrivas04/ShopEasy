@@ -222,22 +222,49 @@ export const productCountController = async (req, res) => {
 // product list base on page
 export const productListController = async (req, res) => {
   try {
-    const perPage = 3;
-    const page = req.params.page ? req.params.page : 1;
+    const perPage = req.params.page == 1 ? 3 : 4;
+    const page = req.params.page ? parseInt(req.params.page) : 1;
+
     const products = await Product.find({})
       .select("-photo")
-      .skip((page - 1) * perPage)
+      .skip((page - 1) * perPage + (page > 1 ? -1 : 0)) // Adjust skip to handle different first-page limit
       .limit(perPage)
       .sort({ createdAt: -1 });
+
     res.status(200).send({
       success: true,
       products,
     });
   } catch (error) {
+    console.error(error);
+    res.status(400).send({
+      success: false,
+      message: "Error in pagination controller",
+      error,
+    });
+  }
+};
+
+//search product
+export const searchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const results = await Product.find({
+      $or: [
+        {
+          name: { $regex: keyword, $options: "i" },
+        },
+        {
+          description: { $regex: keyword, $options: "i" },
+        },
+      ],
+    }).select("-photo");
+    res.json(results);
+  } catch (error) {
     console.log(error);
     res.status(400).send({
       success: false,
-      message: "error in per page ctrl",
+      message: "Error in search product api",
       error,
     });
   }

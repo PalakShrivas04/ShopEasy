@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -127,23 +129,23 @@ const HomePage = () => {
             </Radio.Group>
           </div>
           <div className="flex flex-col mt-4">
-          <div className="flex flex-col mt-4">
-  <button
-    style={{
-      backgroundColor: "#dc3545", // Bootstrap Danger Red
-      color: "white",
-      padding: "10px 16px",
-      borderRadius: "4px",
-      textAlign: "center",
-      cursor: "pointer",
-      width: "100%", // Make the button full-width to match the layout
-      boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
-    }}
-    onClick={() => window.location.reload()}
-  >
-    RESET FILTERS
-  </button>
-</div>
+            <div className="flex flex-col mt-4">
+              <button
+                style={{
+                  backgroundColor: "#dc3545", // Bootstrap Danger Red
+                  color: "white",
+                  padding: "10px 16px",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  width: "100%", // Make the button full-width to match the layout
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
+                }}
+                onClick={() => window.location.reload()}
+              >
+                RESET FILTERS
+              </button>
+            </div>
           </div>
         </div>
         <div className="md:col-span-3">
@@ -166,36 +168,35 @@ const HomePage = () => {
                   </p>
                   <p className="text-gray-900 font-bold mb-4">$ {p.price}</p>
                   <button
-  style={{
-    backgroundColor: "#007bff", // Bootstrap Primary Blue
-    color: "white",
-    padding: "8px 16px",
-    borderRadius: "4px",
-    textAlign: "center",
-    width: "46%", // Adjust the width to fit side by side with a small gap
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
-    marginRight: "4%", // Small margin between the buttons
-    display: "inline-block", // Ensure buttons are inline
-  }}
->
-  More Details
-</button>
-<button
-  style={{
-    backgroundColor: "#6c757d", // Bootstrap Secondary Gray
-    color: "white",
-    padding: "8px 16px",
-    borderRadius: "4px",
-    textAlign: "center",
-    width: "46%", // Adjust the width to fit side by side with a small gap
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
-    display: "inline-block", // Ensure buttons are inline
-  }}
->
-  ADD TO CART
-</button>
-
-
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                    style={{
+                      backgroundColor: "#007bff", // Bootstrap Primary Blue
+                      color: "white",
+                      padding: "8px 16px",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      width: "46%", // Adjust the width to fit side by side with a small gap
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
+                      marginRight: "4%", // Small margin between the buttons
+                      display: "inline-block", // Ensure buttons are inline
+                    }}
+                  >
+                    More Details
+                  </button>
+                  <button
+                    style={{
+                      backgroundColor: "#6c757d", // Bootstrap Secondary Gray
+                      color: "white",
+                      padding: "8px 16px",
+                      borderRadius: "4px",
+                      textAlign: "center",
+                      width: "46%", // Adjust the width to fit side by side with a small gap
+                      boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
+                      display: "inline-block", // Ensure buttons are inline
+                    }}
+                  >
+                    ADD TO CART
+                  </button>
                 </div>
               </div>
             ))}
@@ -203,7 +204,16 @@ const HomePage = () => {
           <div className="m-2 p-3 flex justify-center">
             {products && products.length < total && (
               <button
-                className="btn bg-yellow-500 text-white py-2 px-4 rounded !block"
+                style={{
+                  backgroundColor: "#ffc107", // Bootstrap Warning Yellow
+                  color: "white",
+                  padding: "10px 20px",
+                  borderRadius: "4px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Add a subtle shadow for depth
+                  display: "inline-block", // Ensure it's displayed as a button
+                }}
                 onClick={(e) => {
                   e.preventDefault();
                   setPage(page + 1);

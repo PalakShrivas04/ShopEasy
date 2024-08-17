@@ -4,6 +4,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { Dropdown } from "flowbite-react";
+import SearchInput from "../Form/SearchInput";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -58,6 +59,7 @@ const Header = () => {
           className="hidden md:flex items-center space-x-4"
           id="navbarTogglerDemo01"
         >
+          <SearchInput/>
           <NavLink
             to="/"
             className="text-gray-300 hover:text-yellow-200 hover:border-b hover:border-yellow-200"

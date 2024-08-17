@@ -6,13 +6,14 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/auth.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/reset.css";
+import { SearchProvider } from "./context/search.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
-    <BrowserRouter>
-      <React.StrictMode>
+    <SearchProvider>
+      <BrowserRouter>
         <App />
-      </React.StrictMode>
-    </BrowserRouter>
+      </BrowserRouter>
+    </SearchProvider>
   </AuthProvider>
 );
