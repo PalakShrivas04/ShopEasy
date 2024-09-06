@@ -14,6 +14,8 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+
+  //form function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

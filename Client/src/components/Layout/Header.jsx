@@ -5,9 +5,14 @@ import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
 import { Dropdown } from "flowbite-react";
 import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
+import { Badge } from 'antd';
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const[cart]=useCart();
+  const categories = useCategory();
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -59,19 +64,39 @@ const Header = () => {
           className="hidden md:flex items-center space-x-4"
           id="navbarTogglerDemo01"
         >
-          <SearchInput/>
+          <SearchInput />
           <NavLink
             to="/"
             className="text-gray-300 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
           >
             Home
           </NavLink>
-          <NavLink
-            to="/category"
-            className="text-gray-300 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
+
+          <Dropdown
+      label="Categories"
+      dismissOnClick={false}
+      className="bg-gray-800 text-white"
+    >
+      <Dropdown.Item>
+        <Link
+          to={'/categories'}
+          className="block px-4 py-2 text-gray-300 hover:text-gray-900"
+        >
+          All Categories
+        </Link>
+      </Dropdown.Item>
+
+      {categories?.map((c) => (
+        <Dropdown.Item key={c._id}>
+          <Link
+            to={`/category/${c.slug}`}
+            className="block px-4 py-2 text-gray-300 hover:text-gray-900"
           >
-            Category
-          </NavLink>
+            {c.name}
+          </Link>
+        </Dropdown.Item>
+      ))}
+    </Dropdown>
           {!auth.user ? (
             <>
               <NavLink
@@ -89,13 +114,11 @@ const Header = () => {
             </>
           ) : (
             <Dropdown
-             label={auth?.user?.role === 1 ? "Admin" : "User"}
+              label={auth?.user?.role === 1 ? "Admin" : "User"}
               dismissOnClick={false}
               className="bg-gray-800 text-white"
-              >
-                
-                <Dropdown.Item>
-                  
+            >
+              <Dropdown.Item>
                 <NavLink
                   to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
                   className="px-4 py-2  text-gray-300  hover:text-gray-900"
@@ -115,12 +138,26 @@ const Header = () => {
             </Dropdown>
           )}
 
-          <NavLink
-            to="/cart"
-            className="text-gray-300 hover:text-yellow-200 hover:border-b hover:border-yellow-200 flex items-center"
-          >
-            <GiShoppingBag className="mr-1" /> Cart (0)
-          </NavLink>
+          
+ <Badge size="small" count={cart?.length}  className="relative"
+      style={{
+        backgroundColor: '#ff4d4f', // Example color, adjust as needed
+        color: '#fff',
+        fontSize: '0.75rem', // Adjust font size as needed
+      }}>
+ <NavLink
+        to="/cart"
+        className="flex items-center text-gray-300 hover:text-yellow-200 hover:border-b hover:border-yellow-200"
+        style={{
+          fontSize: '1rem', // Adjust font size of the cart text
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+                <GiShoppingBag className="mr-2 text-xl" /> Cart 
+                </NavLink>
+    </Badge>
+          
         </div>
       </div>
       <div className="md:hidden">
